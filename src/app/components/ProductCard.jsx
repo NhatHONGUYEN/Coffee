@@ -35,9 +35,7 @@ export default function ProductCard({ product }) {
         </CardContent>
         <CardFooter className="flex justify-between">
           <p>{product.price} €</p>
-          <Button className="bg-black text-white" variant="outline">
-            Ajouter
-          </Button>
+          <Button>Ajouter</Button>
         </CardFooter>
       </Card>
     </Link>
