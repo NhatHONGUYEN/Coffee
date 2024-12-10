@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import axios from "axios";
+import ProductCard from "../components/ProductCard";
 
 export default function Products() {
   const [products, setProducts] = useState([]);
@@ -13,6 +14,7 @@ export default function Products() {
         const response = await axios.get(
           "https://fake-coffee-api.vercel.app/api"
         );
+
         setProducts(response.data);
       } catch (error) {
         setError(error.message);
@@ -31,15 +33,10 @@ export default function Products() {
   }
 
   return (
-    <div>
-      <h1>Produits</h1>
-      <ul>
+    <div className="max-w-7xl py-20 mx-auto flex justify-center  ">
+      <ul className="grid gap-16 grid-cols-4">
         {products.map((product) => (
-          <li key={product.id}>
-            <h2>{product.name}</h2>
-            <p>{product.description}</p>
-            <p>Prix : {product.price} €</p>
-          </li>
+          <ProductCard key={product.id} product={product} />
         ))}
       </ul>
     </div>
