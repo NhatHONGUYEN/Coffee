@@ -9,13 +9,14 @@ export default function Nav() {
   return (
     <div className="w-full py-4 px-10 flex items-center justify-between ">
       {/* LOGO */}
-      <div
+      <Link
+        href="/"
         className="flex
        gap-2 items-center cursor-pointer"
       >
         <Coffee className="text-pink-700" />{" "}
         <span className="text-2xl font-bold uppercase">Fake Coffee </span>
-      </div>
+      </Link>
 
       {/* INPUT */}
       <div className="flex flex-col  ">

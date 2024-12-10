@@ -40,7 +40,11 @@ export default function Products() {
   }
 
   if (!products.length) {
-    return <div>Chargement...</div>;
+    return (
+      <div className="flex justify-center items-center w-full h-screen">
+        Chargement...
+      </div>
+    );
   }
 
   return (
