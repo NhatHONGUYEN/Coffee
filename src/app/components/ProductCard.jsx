@@ -9,6 +9,13 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
+const truncateText = (text, maxLength) => {
+  if (text.length <= maxLength) {
+    return text;
+  }
+  return text.substring(0, maxLength) + "...";
+};
+
 export default function ProductCard({ product }) {
   return (
     <Link href={`/product/${product.id}`}>
@@ -22,7 +29,9 @@ export default function ProductCard({ product }) {
         </CardHeader>
         <CardContent>
           <CardTitle>{product.name}</CardTitle>
-          <CardDescription>{product.description}</CardDescription>
+          <CardDescription className="pt-2">
+            {truncateText(product.description, 30)}
+          </CardDescription>
         </CardContent>
         <CardFooter className="flex justify-between">
           <p>{product.price} €</p>
