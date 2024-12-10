@@ -1,11 +1,20 @@
+"use client";
+
 import { Input } from "@/components/ui/input";
 import { Coffee, Search } from "lucide-react";
 import { User } from "lucide-react";
 import { ShoppingBasket } from "lucide-react";
 import { navigation } from "../utils/dataNav";
 import Link from "next/link";
+import { useSearch } from "../context/SearchContext";
 
 export default function Nav() {
+  const { searchTerm, setSearchTerm } = useSearch();
+
+  const handleSearchChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
   return (
     <div className="w-full py-4 px-10 flex items-center justify-between ">
       {/* LOGO */}
@@ -19,10 +28,15 @@ export default function Nav() {
       </Link>
 
       {/* INPUT */}
-      <div className="flex flex-col  ">
+      <div className="flex flex-col ">
         <div className="flex gap-5 items-center">
           <div className="relative">
-            <Input className="pl-9" placeholder="Rechercher des produits" />
+            <Input
+              className="pl-9"
+              placeholder="Rechercher des produits"
+              value={searchTerm}
+              onChange={handleSearchChange}
+            />
             <div className="absolute inset-y-0 left-0 pl-2 flex items-center pointer-events-none">
               <Search className="h-4" />
             </div>

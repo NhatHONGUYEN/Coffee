@@ -4,8 +4,10 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import ProductCard from "../components/ProductCard";
 import { Button } from "@/components/ui/button";
+import { useSearch } from "../context/SearchContext";
 
 export default function Products() {
+  const { searchTerm } = useSearch();
   const [products, setProducts] = useState([]);
   const [displayedProducts, setDisplayedProducts] = useState([]);
   const [error, setError] = useState(null);
@@ -28,9 +30,28 @@ export default function Products() {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    if (searchTerm) {
+      const filteredProducts = products.filter((product) =>
+        product.name.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+      setDisplayedProducts(filteredProducts.slice(0, itemsPerPage));
+      setCurrentIndex(0);
+    } else {
+      setDisplayedProducts(products.slice(0, itemsPerPage));
+      setCurrentIndex(0);
+    }
+  }, [searchTerm, products]);
+
   const loadMore = () => {
     const nextIndex = currentIndex + 4;
-    const nextProducts = products.slice(nextIndex, nextIndex + 4);
+    const nextProducts = products
+      .filter((product) =>
+        searchTerm
+          ? product.name.toLowerCase().includes(searchTerm.toLowerCase())
+          : true
+      )
+      .slice(nextIndex, nextIndex + 4);
     setDisplayedProducts([...displayedProducts, ...nextProducts]);
     setCurrentIndex(nextIndex);
   };
@@ -54,7 +75,12 @@ export default function Products() {
           <ProductCard key={id} product={product} />
         ))}
       </ul>
-      {currentIndex + 4 < products.length && (
+      {currentIndex + 4 <
+        (searchTerm
+          ? products.filter((product) =>
+              product.name.toLowerCase().includes(searchTerm.toLowerCase())
+            ).length
+          : products.length) && (
         <Button onClick={loadMore} className="mt-10">
           Voir plus
         </Button>
