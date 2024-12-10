@@ -1,60 +1,20 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import axios from "axios";
 import ProductCard from "../components/ProductCard";
 import { Button } from "@/components/ui/button";
 import { useSearch } from "../context/SearchContext";
+import { useDisplayedProducts } from "../hook/useDisplayedProducts";
+import { useFetchProducts } from "../hook/useFetchProducts";
 
 export default function Products() {
   const { searchTerm } = useSearch();
-  const [products, setProducts] = useState([]);
-  const [displayedProducts, setDisplayedProducts] = useState([]);
-  const [error, setError] = useState(null);
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const { products, error } = useFetchProducts();
   const itemsPerPage = 8;
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          "https://fake-coffee-api.vercel.app/api"
-        );
-        setProducts(response.data);
-        setDisplayedProducts(response.data.slice(0, itemsPerPage));
-      } catch (error) {
-        setError(error.message);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  useEffect(() => {
-    if (searchTerm) {
-      const filteredProducts = products.filter((product) =>
-        product.name.toLowerCase().includes(searchTerm.toLowerCase())
-      );
-      setDisplayedProducts(filteredProducts.slice(0, itemsPerPage));
-      setCurrentIndex(0);
-    } else {
-      setDisplayedProducts(products.slice(0, itemsPerPage));
-      setCurrentIndex(0);
-    }
-  }, [searchTerm, products]);
-
-  const loadMore = () => {
-    const nextIndex = currentIndex + 4;
-    const nextProducts = products
-      .filter((product) =>
-        searchTerm
-          ? product.name.toLowerCase().includes(searchTerm.toLowerCase())
-          : true
-      )
-      .slice(nextIndex, nextIndex + 4);
-    setDisplayedProducts([...displayedProducts, ...nextProducts]);
-    setCurrentIndex(nextIndex);
-  };
+  const { displayedProducts, currentIndex, loadMore } = useDisplayedProducts(
+    products,
+    searchTerm,
+    itemsPerPage
+  );
 
   if (error) {
     return <div>Erreur : {error}</div>;
@@ -75,7 +35,7 @@ export default function Products() {
           <ProductCard key={id} product={product} />
         ))}
       </ul>
-      {currentIndex + 4 <
+      {currentIndex + itemsPerPage <
         (searchTerm
           ? products.filter((product) =>
               product.name.toLowerCase().includes(searchTerm.toLowerCase())
