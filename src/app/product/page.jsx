@@ -8,7 +8,7 @@ import { useFetchProducts } from "../hook/useFetchProducts";
 
 export default function Products() {
   const { searchTerm } = useSearch();
-  const { products, error } = useFetchProducts();
+  const { products, error, loading } = useFetchProducts();
   const itemsPerPage = 8;
   const { displayedProducts, currentIndex, loadMore } = useDisplayedProducts(
     products,
@@ -20,7 +20,7 @@ export default function Products() {
     return <div>Erreur : {error}</div>;
   }
 
-  if (!products.length) {
+  if (loading) {
     return (
       <div className="flex justify-center items-center w-full h-screen">
         Chargement...
