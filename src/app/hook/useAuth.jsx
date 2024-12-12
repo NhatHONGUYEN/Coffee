@@ -1,13 +1,13 @@
 import { useRouter } from "next/navigation";
 import { auth, db } from "../api/firebaseConfig";
-import { setDoc } from "firebase/firestore";
-import { useEffect } from "react";
-
-const {
+import { doc, setDoc } from "firebase/firestore";
+import { useEffect, useState } from "react";
+import {
   GoogleAuthProvider,
   signInWithPopup,
   createUserWithEmailAndPassword,
-} = require("firebase/auth");
+  onAuthStateChanged,
+} from "firebase/auth";
 
 const providerGoogle = new GoogleAuthProvider();
 
@@ -19,7 +19,7 @@ export default function useAuth() {
   const loginWithGoogle = async () => {
     try {
       const result = await signInWithPopup(auth, providerGoogle);
-      setUser(result);
+      setUser(result.user);
       router.push("/");
     } catch (error) {
       console.error("Erreur lors de la connexion avec Google:", error);
