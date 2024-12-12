@@ -1,15 +1,16 @@
 "use client";
 
 import { Input } from "@/components/ui/input";
-import { Coffee, Search } from "lucide-react";
-import { User } from "lucide-react";
-import { ShoppingBasket } from "lucide-react";
+import { Coffee, Search, User, ShoppingBasket } from "lucide-react";
 import { navigation } from "../utils/dataNav";
 import Link from "next/link";
 import { useSearch } from "../context/SearchContext";
+import useAuth from "../hook/useAuth";
+import { Button } from "@/components/ui/button";
 
 export default function Nav() {
   const { searchTerm, setSearchTerm } = useSearch();
+  const { user, signOut } = useAuth();
 
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
@@ -18,11 +19,7 @@ export default function Nav() {
   return (
     <div className="w-full py-4 px-10 flex items-center justify-between ">
       {/* LOGO */}
-      <Link
-        href="/"
-        className="flex
-       gap-2 items-center cursor-pointer"
-      >
+      <Link href="/" className="flex gap-2 items-center cursor-pointer">
         <Coffee className="text-pink-700" />{" "}
         <span className="text-2xl font-bold uppercase">Fake Coffee </span>
       </Link>
@@ -43,13 +40,22 @@ export default function Nav() {
           </div>
 
           {/* USER & PANIER */}
-          <Link href="/signIn" className="flex gap-2">
-            <User className="text-pink-700" />{" "}
-            <span className="uppercase hover:text-pink-700 cursor-pointer ">
-              Connexion
-            </span>
-          </Link>
-          <div className="flex  gap-2">
+
+          {user ? (
+            <div className="flex gap-2">
+              <User className="text-pink-700" /> <span>{user.username}</span>{" "}
+              <Button onClick={signOut}>Deconnexion</Button>
+            </div>
+          ) : (
+            <Link href="/signIn" className="flex gap-2">
+              <User className="text-pink-700" />{" "}
+              <span className="uppercase hover:text-pink-700 cursor-pointer ">
+                Connexion
+              </span>
+            </Link>
+          )}
+
+          <div className="flex gap-2">
             <ShoppingBasket className="text-pink-700" />
             <span className="uppercase hover:text-pink-700 cursor-pointer">
               Panier

@@ -1,6 +1,6 @@
 import { useRouter } from "next/navigation";
 import { auth, db } from "../api/firebaseConfig";
-import { doc, setDoc } from "firebase/firestore";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import {
   GoogleAuthProvider,
@@ -8,6 +8,7 @@ import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
   signInWithEmailAndPassword,
+  signOut as firebaseSignOut,
 } from "firebase/auth";
 
 const providerGoogle = new GoogleAuthProvider();
@@ -20,7 +21,8 @@ export default function useAuth() {
   const loginWithGoogle = async () => {
     try {
       const result = await signInWithPopup(auth, providerGoogle);
-      setUser(result.user);
+      const userData = await getUserData(result.user.uid);
+      setUser(userData);
       router.push("/");
     } catch (error) {
       console.error("Erreur lors de la connexion avec Google:", error);
@@ -44,7 +46,8 @@ export default function useAuth() {
         email: user.email,
         username: username,
       });
-      setUser(user);
+      const userData = await getUserData(user.uid);
+      setUser(userData);
       router.push("/");
     } catch (error) {
       console.error("Erreur lors de la création du compte:", error);
@@ -56,9 +59,9 @@ export default function useAuth() {
 
   const signInWithEmailAndPass = async (email, password) => {
     try {
-      console.log("Tentative de connexion avec email:", email);
       const result = await signInWithEmailAndPassword(auth, email, password);
-      setUser(result.user);
+      const userData = await getUserData(result.user.uid);
+      setUser(userData);
       router.push("/");
     } catch (error) {
       console.error("Erreur lors de la connexion:", error);
@@ -67,10 +70,36 @@ export default function useAuth() {
       );
     }
   };
+
+  const signOut = async () => {
+    try {
+      await firebaseSignOut(auth);
+      setUser(null);
+      router.push("/"); // Rediriger vers la page de connexion après la déconnexion
+    } catch (error) {
+      console.error("Erreur lors de la déconnexion:", error);
+      setError(
+        "Une erreur s'est produite lors de la déconnexion. Veuillez réessayer."
+      );
+    }
+  };
+
+  const getUserData = async (uid) => {
+    const docRef = doc(db, "users", uid);
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      return { uid: docSnap.id, ...docSnap.data() };
+    } else {
+      console.error("Aucun document trouvé pour cet utilisateur");
+      return null;
+    }
+  };
+
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
-        setUser(user);
+        const userData = await getUserData(user.uid);
+        setUser(userData);
       } else {
         setUser(null);
       }
@@ -91,6 +120,7 @@ export default function useAuth() {
     loginWithGoogle,
     signUpWithEmailAndPassword,
     signInWithEmailAndPass,
+    signOut, // Ajouter la fonction de déconnexion
     moveToHome,
   };
 }
