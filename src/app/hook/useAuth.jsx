@@ -7,6 +7,7 @@ import {
   signInWithPopup,
   createUserWithEmailAndPassword,
   onAuthStateChanged,
+  signInWithEmailAndPassword,
 } from "firebase/auth";
 
 const providerGoogle = new GoogleAuthProvider();
@@ -53,8 +54,9 @@ export default function useAuth() {
     }
   };
 
-  const signInWithEmailAndPassword = async (email, password) => {
+  const signInWithEmailAndPass = async (email, password) => {
     try {
+      console.log("Tentative de connexion avec email:", email);
       const result = await signInWithEmailAndPassword(auth, email, password);
       setUser(result.user);
       router.push("/");
@@ -65,7 +67,6 @@ export default function useAuth() {
       );
     }
   };
-
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -89,7 +90,7 @@ export default function useAuth() {
     error,
     loginWithGoogle,
     signUpWithEmailAndPassword,
-    signInWithEmailAndPassword,
+    signInWithEmailAndPass,
     moveToHome,
   };
 }

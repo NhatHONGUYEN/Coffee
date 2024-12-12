@@ -4,8 +4,8 @@ import { Coffee } from "lucide-react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import useAuth from "../hook/useAuth";
-import userSchema from "../(form)/schemas/userSchema";
+import useAuth from "../../hook/useAuth";
+import userSchema from "../schemas/userSchema";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
