@@ -42,8 +42,11 @@ export default function Nav() {
           {/* USER & PANIER */}
 
           {user ? (
-            <div className="flex gap-2">
-              <User className="text-pink-700" /> <span>{user.username}</span>{" "}
+            <div className="flex justify-center items-center gap-2">
+              <User className="text-pink-700" />{" "}
+              <span>
+                {user.provider === "google" ? user.email : user.username}
+              </span>{" "}
               <Button onClick={signOut}>Deconnexion</Button>
             </div>
           ) : (

@@ -22,7 +22,18 @@ export default function useAuth() {
     try {
       const result = await signInWithPopup(auth, providerGoogle);
       const userData = await getUserData(result.user.uid);
-      setUser(userData);
+      if (!userData) {
+        // Si l'utilisateur n'existe pas dans la base de données, créez un nouvel utilisateur
+        await setDoc(doc(db, "users", result.user.uid), {
+          uid: result.user.uid,
+          email: result.user.email,
+          username: result.user.displayName,
+        });
+        const newUserData = await getUserData(result.user.uid);
+        setUser(newUserData);
+      } else {
+        setUser(userData);
+      }
       router.push("/");
     } catch (error) {
       console.error("Erreur lors de la connexion avec Google:", error);
@@ -90,7 +101,6 @@ export default function useAuth() {
     if (docSnap.exists()) {
       return { uid: docSnap.id, ...docSnap.data() };
     } else {
-      console.error("Aucun document trouvé pour cet utilisateur");
       return null;
     }
   };
