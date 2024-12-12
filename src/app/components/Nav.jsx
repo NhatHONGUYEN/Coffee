@@ -43,12 +43,12 @@ export default function Nav() {
           </div>
 
           {/* USER & PANIER */}
-          <div className="flex gap-2">
+          <Link href="/signIn" className="flex gap-2">
             <User className="text-pink-700" />{" "}
             <span className="uppercase hover:text-pink-700 cursor-pointer ">
               Connexion
             </span>
-          </div>
+          </Link>
           <div className="flex  gap-2">
             <ShoppingBasket className="text-pink-700" />
             <span className="uppercase hover:text-pink-700 cursor-pointer">
