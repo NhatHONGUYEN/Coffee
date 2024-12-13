@@ -1,18 +1,27 @@
 "use client";
 
+import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Coffee, Search, ShoppingBasket } from "lucide-react";
 import { navigation } from "../utils/dataNav";
 import Link from "next/link";
 import { useSearch } from "../context/SearchContext";
 import useAuth from "../hook/useAuth";
+import SignInLink from "../(form)/signIn/SignInLink";
+import UserInfo from "../(form)/signIn/UserInfo";
+import BasketDrawer from "../components/BasketDrawer"; // Importez le composant BasketDrawer
 
 export default function Nav() {
   const { searchTerm, setSearchTerm } = useSearch();
   const { user, signOut } = useAuth();
+  const [isBasketOpen, setIsBasketOpen] = useState(false);
 
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
+  };
+
+  const handleBasketOpen = () => {
+    setIsBasketOpen(!isBasketOpen);
   };
 
   return (
@@ -42,12 +51,12 @@ export default function Nav() {
 
           {user ? <UserInfo user={user} signOut={signOut} /> : <SignInLink />}
 
-          <div className="flex gap-2">
+          <button onClick={handleBasketOpen} className="flex gap-2">
             <ShoppingBasket className="text-pink-700" />
             <span className="uppercase hover:text-pink-700 cursor-pointer">
               Panier
             </span>
-          </div>
+          </button>
         </div>
 
         {/* NAVIGATION */}
@@ -63,6 +72,12 @@ export default function Nav() {
           ))}
         </div>
       </div>
+
+      {/* BASKET DRAWER */}
+      <BasketDrawer
+        isOpen={isBasketOpen}
+        onClose={() => setIsBasketOpen(false)}
+      />
     </div>
   );
 }

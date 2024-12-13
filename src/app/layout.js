@@ -2,6 +2,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import Nav from "./components/Nav";
 import { SearchProvider } from "./context/SearchContext";
+import { BasketProvider } from "./context/BasketContext";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -22,14 +23,16 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <SearchProvider>
-        <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased max-w-[1700px] flex flex-col justify-center mx-auto`}
-        >
-          <Nav />
-          {children}
-        </body>
-      </SearchProvider>
+      <BasketProvider>
+        <SearchProvider>
+          <body
+            className={`${geistSans.variable} ${geistMono.variable} antialiased max-w-[1700px] flex flex-col justify-center mx-auto`}
+          >
+            <Nav />
+            {children}
+          </body>
+        </SearchProvider>
+      </BasketProvider>
     </html>
   );
 }

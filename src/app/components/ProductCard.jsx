@@ -8,6 +8,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { useBasket } from "../context/BasketContext";
 
 const truncateText = (text, maxLength) => {
   if (text.length <= maxLength) {
@@ -17,6 +18,13 @@ const truncateText = (text, maxLength) => {
 };
 
 export default function ProductCard({ product }) {
+  const { addItem } = useBasket();
+
+  const handleAddItem = (event) => {
+    event.preventDefault(); // Empêche la propagation de l'événement de clic
+    addItem(product);
+  };
+
   return (
     <Link href={`/product/${product.id}`}>
       <Card>
@@ -35,7 +43,7 @@ export default function ProductCard({ product }) {
         </CardContent>
         <CardFooter className="flex justify-between">
           <p>{product.price} €</p>
-          <Button>Ajouter</Button>
+          <Button onClick={handleAddItem}>Ajouter</Button>
         </CardFooter>
       </Card>
     </Link>
