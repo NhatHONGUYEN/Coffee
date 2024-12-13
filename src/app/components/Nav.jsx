@@ -1,12 +1,11 @@
 "use client";
 
 import { Input } from "@/components/ui/input";
-import { Coffee, Search, User, ShoppingBasket } from "lucide-react";
+import { Coffee, Search, ShoppingBasket } from "lucide-react";
 import { navigation } from "../utils/dataNav";
 import Link from "next/link";
 import { useSearch } from "../context/SearchContext";
 import useAuth from "../hook/useAuth";
-import { Button } from "@/components/ui/button";
 
 export default function Nav() {
   const { searchTerm, setSearchTerm } = useSearch();
@@ -41,22 +40,7 @@ export default function Nav() {
 
           {/* USER & PANIER */}
 
-          {user ? (
-            <div className="flex justify-center items-center gap-2">
-              <User className="text-pink-700" />{" "}
-              <span>
-                {user.provider === "google" ? user.email : user.username}
-              </span>{" "}
-              <Button onClick={signOut}>Deconnexion</Button>
-            </div>
-          ) : (
-            <Link href="/signIn" className="flex gap-2">
-              <User className="text-pink-700" />{" "}
-              <span className="uppercase hover:text-pink-700 cursor-pointer ">
-                Connexion
-              </span>
-            </Link>
-          )}
+          {user ? <UserInfo user={user} signOut={signOut} /> : <SignInLink />}
 
           <div className="flex gap-2">
             <ShoppingBasket className="text-pink-700" />

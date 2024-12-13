@@ -3,45 +3,16 @@ import { auth, db } from "../api/firebaseConfig";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import {
-  GoogleAuthProvider,
-  signInWithPopup,
   createUserWithEmailAndPassword,
   onAuthStateChanged,
   signInWithEmailAndPassword,
   signOut as firebaseSignOut,
 } from "firebase/auth";
 
-const providerGoogle = new GoogleAuthProvider();
-
 export default function useAuth() {
   const [user, setUser] = useState(null);
   const [error, setError] = useState(null);
   const router = useRouter();
-
-  const loginWithGoogle = async () => {
-    try {
-      const result = await signInWithPopup(auth, providerGoogle);
-      const userData = await getUserData(result.user.uid);
-      if (!userData) {
-        // Si l'utilisateur n'existe pas dans la base de données, créez un nouvel utilisateur
-        await setDoc(doc(db, "users", result.user.uid), {
-          uid: result.user.uid,
-          email: result.user.email,
-          username: result.user.displayName,
-        });
-        const newUserData = await getUserData(result.user.uid);
-        setUser(newUserData);
-      } else {
-        setUser(userData);
-      }
-      router.push("/");
-    } catch (error) {
-      console.error("Erreur lors de la connexion avec Google:", error);
-      setError(
-        "Une erreur s'est produite lors de la connexion avec Google. Veuillez réessayer."
-      );
-    }
-  };
 
   const signUpWithEmailAndPassword = async (email, password, username) => {
     try {
@@ -127,7 +98,6 @@ export default function useAuth() {
   return {
     user,
     error,
-    loginWithGoogle,
     signUpWithEmailAndPassword,
     signInWithEmailAndPass,
     signOut, // Ajouter la fonction de déconnexion
