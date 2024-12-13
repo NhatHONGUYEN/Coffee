@@ -9,6 +9,9 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useBasket } from "../context/BasketContext";
+import { FaHeart, FaRegHeart } from "react-icons/fa";
+import { useLikes } from "../context/LikesContext";
+import useAuth from "../hook/useAuth";
 
 const truncateText = (text, maxLength) => {
   if (text.length <= maxLength) {
@@ -19,15 +22,37 @@ const truncateText = (text, maxLength) => {
 
 export default function ProductCard({ product }) {
   const { addItem } = useBasket();
+  const { addLike, removeLike, isLiked } = useLikes();
+  const { user } = useAuth();
 
   const handleAddItem = (event) => {
     event.preventDefault(); // Empêche la propagation de l'événement de clic
     addItem(product);
   };
 
+  const handleLike = (event) => {
+    event.preventDefault(); // Empêche la propagation de l'événement de clic
+    if (isLiked(product.id)) {
+      removeLike(product.id);
+    } else {
+      addLike(product.id);
+    }
+  };
+
   return (
     <Link href={`/product/${product.id}`}>
-      <Card>
+      <Card className="relative">
+        {user && (
+          <div className="absolute top-2 right-2">
+            <Button
+              variant="none"
+              className="hover:scale-125 "
+              onClick={handleLike}
+            >
+              {isLiked(product.id) ? <FaHeart /> : <FaRegHeart />}
+            </Button>
+          </div>
+        )}
         <CardHeader>
           <img
             className="object-cover hover:scale-125 duration-300 ease-in-out w-full h-48"

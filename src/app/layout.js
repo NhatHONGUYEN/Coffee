@@ -3,6 +3,7 @@ import "./globals.css";
 import Nav from "./components/Nav";
 import { SearchProvider } from "./context/SearchContext";
 import { BasketProvider } from "./context/BasketContext";
+import { LikesProvider } from "./context/LikesContext";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -24,14 +25,16 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <BasketProvider>
-        <SearchProvider>
-          <body
-            className={`${geistSans.variable} ${geistMono.variable} antialiased max-w-[1700px] flex flex-col justify-center mx-auto`}
-          >
-            <Nav />
-            {children}
-          </body>
-        </SearchProvider>
+        <LikesProvider>
+          <SearchProvider>
+            <body
+              className={`${geistSans.variable} ${geistMono.variable} antialiased max-w-[1700px] flex flex-col justify-center mx-auto`}
+            >
+              <Nav />
+              {children}
+            </body>
+          </SearchProvider>
+        </LikesProvider>
       </BasketProvider>
     </html>
   );
