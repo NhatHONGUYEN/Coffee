@@ -51,7 +51,7 @@ export default function BasketDrawer({ isOpen, onClose }) {
                         </div>
                       </div>
                     ) : (
-                      <p className="text-sm text-gray-500">
+                      <p className="text-sm  text-gray-500">
                         Votre panier est vide.
                       </p>
                     )}
