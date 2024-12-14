@@ -1,3 +1,5 @@
+"use client";
+
 import { useRouter } from "next/navigation";
 import { auth, db } from "../api/firebaseConfig";
 import { doc, getDoc, setDoc } from "firebase/firestore";

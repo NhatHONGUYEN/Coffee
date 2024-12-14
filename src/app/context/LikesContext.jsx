@@ -1,5 +1,5 @@
 "use client";
-// LikesContext.js
+
 import { createContext, useContext, useState } from "react";
 
 const LikesContext = createContext();
@@ -20,7 +20,9 @@ export const LikesProvider = ({ children }) => {
   };
 
   return (
-    <LikesContext.Provider value={{ likes, addLike, removeLike, isLiked }}>
+    <LikesContext.Provider
+      value={{ likes, setLikes, addLike, removeLike, isLiked }}
+    >
       {children}
     </LikesContext.Provider>
   );

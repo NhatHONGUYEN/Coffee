@@ -35,7 +35,7 @@ export default function ProductCard({ product }) {
     if (isLiked(product.id)) {
       removeLike(product.id);
     } else {
-      addLike(product.id);
+      addLike(product);
     }
   };
 
