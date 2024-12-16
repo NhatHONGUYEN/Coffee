@@ -10,11 +10,13 @@ import useAuth from "../hook/useAuth";
 import SignInLink from "../(form)/signIn/SignInLink";
 import UserInfo from "../(form)/signIn/UserInfo";
 import BasketDrawer from "../components/BasketDrawer"; // Importez le composant BasketDrawer
+import { useBasket } from "../context/BasketContext";
 
 export default function Nav() {
   const { searchTerm, setSearchTerm } = useSearch();
   const { user, signOut } = useAuth();
   const [isBasketOpen, setIsBasketOpen] = useState(false);
+  const { basket } = useBasket();
 
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
@@ -51,9 +53,16 @@ export default function Nav() {
 
           {user ? <UserInfo user={user} signOut={signOut} /> : <SignInLink />}
 
-          <button onClick={handleBasketOpen} className="flex gap-2">
-            <ShoppingBasket className="text-pink-700" />
-            <span className="uppercase hover:text-pink-700 cursor-pointer">
+          <button onClick={handleBasketOpen} className="flex     gap-2">
+            <div className="relative">
+              {" "}
+              <ShoppingBasket className="text-pink-700     flex gap-2" />
+              <div className="absolute -top-2 -right-2 bg-pink-700 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                {basket.length}
+              </div>
+            </div>
+
+            <span className="uppercase ml-2 hover:text-pink-700 cursor-pointer">
               Panier
             </span>
           </button>

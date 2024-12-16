@@ -7,7 +7,6 @@ import {
 
 import { User } from "lucide-react";
 import Link from "next/link";
-import React, from "react";
 
 export default function UserInfo({ user, signOut }) {
   return (
