@@ -1,11 +1,12 @@
 "use client";
 
 import React from "react";
-import { useBasket } from "../context/BasketContext";
+import { useBasket } from "../../context/BasketContext";
 import { Button } from "@/components/ui/button";
-import Suggestions from "./Suggestions";
+import Suggestions from "../Suggestions";
 import ProductAccordion from "./ProductAccordion";
 import ProductInfo from "./ProductInfo";
+import Reviews from "../review/Reviews";
 
 export default function ProductDetails({ product }) {
   const { addItem } = useBasket();
@@ -16,8 +17,8 @@ export default function ProductDetails({ product }) {
 
   return (
     <>
-      <div className="max-w-7xl pt-10 flex justify-center items-center">
-        <div className="lg:w-[400px]">
+      <div className="max-w-7xl mx-auto pt-20 pr-40 flex justify-center items-center">
+        <div className="lg:w-[600px]">
           <img src={product.image_url} alt={product.name} />
         </div>
         <div className="flex flex-col gap-4 text-md">
@@ -26,6 +27,7 @@ export default function ProductDetails({ product }) {
           <Button onClick={handleAddItem}>Ajouter</Button>
         </div>
       </div>
+      <Reviews />
       <Suggestions />
     </>
   );

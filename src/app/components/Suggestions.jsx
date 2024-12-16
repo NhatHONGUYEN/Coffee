@@ -21,7 +21,7 @@ export default function Suggestions() {
 
   return (
     <div className="max-w-7xl mx-auto  ">
-      <h1 className="text-xl font-bold py-20  ">Suggestions</h1>
+      <h1 className="text-xl font-bold pt-5  pb-10  ">Suggestions</h1>
       <div className="flex gap-10">{randomProducts}</div>;
     </div>
   );

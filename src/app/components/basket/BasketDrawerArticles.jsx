@@ -2,7 +2,7 @@
 import { Button } from "@/components/ui/button";
 
 import React from "react";
-import { useBasket } from "../context/BasketContext";
+import { useBasket } from "../../context/BasketContext";
 
 const BasketDrawerArticles = ({ item }) => {
   const { addItem, removeItem } = useBasket();

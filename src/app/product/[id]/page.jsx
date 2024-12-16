@@ -1,6 +1,6 @@
 "use client";
 
-import ProductDetails from "@/app/components/ProductDetails";
+import ProductDetails from "@/app/components/singleProduct/ProductDetails";
 import axios from "axios";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";

@@ -9,7 +9,7 @@ import { useSearch } from "../context/SearchContext";
 import useAuth from "../hook/useAuth";
 import SignInLink from "../(form)/signIn/SignInLink";
 import UserInfo from "../(form)/signIn/UserInfo";
-import BasketDrawer from "../components/BasketDrawer"; // Importez le composant BasketDrawer
+import BasketDrawer from "./basket/BasketDrawer"; // Importez le composant BasketDrawer
 import { useBasket } from "../context/BasketContext";
 
 export default function Nav() {

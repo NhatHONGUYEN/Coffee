@@ -5,9 +5,10 @@ import {
   DialogTitle,
 } from "@headlessui/react";
 
-import { useBasket } from "../context/BasketContext";
-import BasketDrawerArticles from "./BasketDrawerArticles";
+import { useBasket } from "../../context/BasketContext";
+
 import { Button } from "@/components/ui/button";
+import BasketDrawerArticles from "./BasketDrawerArticles";
 
 export default function BasketDrawer({ isOpen, onClose }) {
   const { basket, removeItem, totalPrice } = useBasket();
