@@ -38,7 +38,6 @@ export default function SignUpForm() {
         <div className="bg-white px-6 py-12 shadow sm:rounded-lg sm:px-12">
           <form
             onSubmit={handleSubmit(onSubmit)}
-            action="#"
             method="POST"
             className="space-y-6"
           >

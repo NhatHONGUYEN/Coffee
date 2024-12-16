@@ -32,10 +32,15 @@ export default function ProductCard({ product }) {
 
   const handleLike = (event) => {
     event.preventDefault(); // Empêche la propagation de l'événement de clic
-    if (isLiked(product.id)) {
-      removeLike(product.id);
+    if (user) {
+      if (isLiked(product.id)) {
+        removeLike(product.id);
+      } else {
+        addLike(product);
+      }
     } else {
-      addLike(product);
+      // Rediriger l'utilisateur vers la page de connexion ou afficher un message
+      console.log("Veuillez vous connecter pour ajouter des likes.");
     }
   };
 
@@ -46,7 +51,7 @@ export default function ProductCard({ product }) {
           <div className="absolute top-2 right-2">
             <Button
               variant="none"
-              className="hover:scale-125 "
+              className="hover:scale-125"
               onClick={handleLike}
             >
               {isLiked(product.id) ? <FaHeart /> : <FaRegHeart />}
