@@ -55,7 +55,7 @@ export default function BasketDrawer({ isOpen, onClose }) {
                         </div>
                       </div>
                     ) : (
-                      <p className="text-sm  text-gray-500">
+                      <p className="text-sm   text-gray-500">
                         Votre panier est vide.
                       </p>
                     )}
@@ -66,9 +66,14 @@ export default function BasketDrawer({ isOpen, onClose }) {
                   <Button className="w-full" onClick={onClose}>
                     Continue to shopping
                   </Button>
-                </div>
-                <div>
-                  <Button onClick={handleCheckout}>Payer avec Stripe</Button>
+                  {basket.length > 0 && (
+                    <Button
+                      className="mt-2 w-full bg-pink-700"
+                      onClick={handleCheckout}
+                    >
+                      Payer avec Stripe
+                    </Button>
+                  )}
                 </div>
               </div>
             </DialogPanel>
