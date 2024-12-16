@@ -4,6 +4,7 @@ import Nav from "./components/Nav";
 import { SearchProvider } from "./context/SearchContext";
 import { BasketProvider } from "./context/BasketContext";
 import { LikesProvider } from "./context/LikesContext";
+import Footer from "./components/Footer";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -32,6 +33,7 @@ export default function RootLayout({ children }) {
             >
               <Nav />
               {children}
+              <Footer />
             </body>
           </SearchProvider>
         </LikesProvider>
