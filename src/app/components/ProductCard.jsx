@@ -51,7 +51,7 @@ export default function ProductCard({ product }) {
           <div className="absolute top-2 right-2">
             <Button
               variant="none"
-              className="hover:scale-125"
+              className="hover:scale-125 z-10"
               onClick={handleLike}
             >
               {isLiked(product.id) ? <FaHeart /> : <FaRegHeart />}
@@ -60,7 +60,7 @@ export default function ProductCard({ product }) {
         )}
         <CardHeader>
           <img
-            className="object-cover hover:scale-125 duration-300 ease-in-out w-full h-48"
+            className="object-cover  w-full h-48"
             src={product.image_url}
             alt={product.name}
           />
