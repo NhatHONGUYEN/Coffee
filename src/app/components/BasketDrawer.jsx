@@ -4,7 +4,6 @@ import {
   DialogPanel,
   DialogTitle,
 } from "@headlessui/react";
-import { XMarkIcon } from "@heroicons/react/24/outline";
 
 import { useBasket } from "../context/BasketContext";
 import BasketDrawerArticles from "./BasketDrawerArticles";
@@ -12,6 +11,11 @@ import { Button } from "@/components/ui/button";
 
 export default function BasketDrawer({ isOpen, onClose }) {
   const { basket, removeItem, totalPrice } = useBasket();
+
+  const handleCheckout = () => {
+    // Rediriger vers le lien de test Stripe
+    window.location.href = "https://buy.stripe.com/test_fZe5nwb7ZdLG1TG28a";
+  };
 
   return (
     <Dialog open={isOpen} onClose={onClose} className="relative z-10">
@@ -62,6 +66,9 @@ export default function BasketDrawer({ isOpen, onClose }) {
                   <Button className="w-full" onClick={onClose}>
                     Continue to shopping
                   </Button>
+                </div>
+                <div>
+                  <Button onClick={handleCheckout}>Payer avec Stripe</Button>
                 </div>
               </div>
             </DialogPanel>
