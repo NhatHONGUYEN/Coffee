@@ -19,20 +19,14 @@ const ContactFormField = ({
       </label>
       <div className="mt-2.5">
         {type === "textarea" ? (
-          <Textarea
-            id={id}
-            {...register}
-            rows={rows}
-            className="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600"
-            defaultValue={""}
-          />
+          <Textarea id={id} {...register} rows={rows} defaultValue={""} />
         ) : (
           <Input
             id={id}
             {...register}
             type={type}
             autoComplete={autoComplete}
-            className="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600"
+            className="w-full"
           />
         )}
         {error && <p className="text-red-500 text-sm mt-1">{error.message}</p>}

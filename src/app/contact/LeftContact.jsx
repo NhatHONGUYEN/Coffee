@@ -9,36 +9,36 @@ export default function LeftContact() {
     <div className="relative px-6 pt-24 pb-20 sm:pt-32 lg:static lg:px-8 lg:py-48">
       <div className="mx-auto max-w-xl lg:mx-0 lg:max-w-lg">
         <h2 className="text-4xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-5xl">
-          Get in touch
+          Contactez-nous
         </h2>
-        <p className="mt-6 text-lg/8 text-gray-600">
-          Proin volutpat consequat porttitor cras nullam gravida at. Orci
-          molestie a eu arcu. Sed ut tincidunt integer elementum id sem. Arcu
-          sed malesuada et magna.
+        <p className="mt-6 text-gray-600">
+          Nous sommes ravis de vous accueillir dans notre café. Si vous avez des
+          questions ou des commentaires, n'hésitez pas à nous contacter. Nous
+          sommes là pour vous aider!
         </p>
         <dl className="mt-10 space-y-4 text-base/7 text-gray-600">
           <div className="flex gap-x-4">
             <dt className="flex-none">
-              <span className="sr-only">Address</span>
+              <span className="sr-only">Adresse</span>
               <BuildingOffice2Icon
                 aria-hidden="true"
                 className="h-7 w-6 text-gray-400"
               />
             </dt>
             <dd>
-              545 Mavis Island
+              123 Rue du Café
               <br />
-              Chicago, IL 99191
+              Paris, 75001
             </dd>
           </div>
           <div className="flex gap-x-4">
             <dt className="flex-none">
-              <span className="sr-only">Telephone</span>
+              <span className="sr-only">Téléphone</span>
               <PhoneIcon aria-hidden="true" className="h-7 w-6 text-gray-400" />
             </dt>
             <dd>
-              <a href="tel:+1 (555) 234-5678" className="hover:text-gray-900">
-                +1 (555) 234-5678
+              <a href="tel:+33123456789" className="hover:text-gray-900">
+                +33 1 23 45 67 89
               </a>
             </dd>
           </div>
@@ -51,11 +51,8 @@ export default function LeftContact() {
               />
             </dt>
             <dd>
-              <a
-                href="mailto:hello@example.com"
-                className="hover:text-gray-900"
-              >
-                hello@example.com
+              <a href="mailto:contact@cafe.com" className="hover:text-gray-900">
+                contact@cafe.com
               </a>
             </dd>
           </div>
