@@ -41,7 +41,7 @@ export default function Products() {
               product.name.toLowerCase().includes(searchTerm.toLowerCase())
             ).length
           : products.length) && (
-        <Button onClick={loadMore} className="mt-10">
+        <Button onClick={loadMore} className="mt-32">
           Voir plus
         </Button>
       )}

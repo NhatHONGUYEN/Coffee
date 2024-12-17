@@ -1,15 +1,4 @@
-const testimonials = [
-  {
-    body: "Laborum quis quam. Dolorum et ut quod quia. Voluptas numquam delectus nihil. Aut enim doloremque et ipsam.",
-    author: {
-      name: "Leslie Alexander",
-      handle: "lesliealexander",
-      imageUrl:
-        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-    },
-  },
-  // More testimonials...
-];
+import { testimonials } from "../utils/dataTestimonials";
 
 export default function Example() {
   return (
@@ -20,7 +9,7 @@ export default function Example() {
             Testimonials
           </h2>
           <p className="mt-2 text-4xl font-semibold tracking-tight text-balance text-gray-900 sm:text-5xl">
-            We have worked with thousands of amazing people
+            We have delighted thousands of satisfied customers
           </p>
         </div>
         <div className="mx-auto mt-16 flow-root max-w-2xl sm:mt-20 lg:mx-0 lg:max-w-none">

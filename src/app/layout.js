@@ -1,6 +1,6 @@
 import localFont from "next/font/local";
 import "./globals.css";
-import Nav from "./components/Nav";
+import Nav from "./components/nav/Nav";
 import { SearchProvider } from "./context/SearchContext";
 import { BasketProvider } from "./context/BasketContext";
 import { LikesProvider } from "./context/LikesContext";
@@ -29,7 +29,7 @@ export default function RootLayout({ children }) {
         <LikesProvider>
           <SearchProvider>
             <body
-              className={`${geistSans.variable} ${geistMono.variable} antialiased max-w-[1700px] flex flex-col justify-center mx-auto`}
+              className={`${geistSans.variable} ${geistMono.variable} antialiased  `}
             >
               <Nav />
               {children}

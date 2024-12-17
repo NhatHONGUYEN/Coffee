@@ -12,7 +12,7 @@ export default function UserInfo({ user, signOut }) {
   return (
     <Popover className="relative">
       <PopoverTrigger className="flex gap-2 items-center cursor-pointer">
-        <User className="text-pink-700" />
+        <User className="text-pink-700 " />
         <span>{user.username}</span>
       </PopoverTrigger>
 

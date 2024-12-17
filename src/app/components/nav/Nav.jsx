@@ -3,20 +3,19 @@
 import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Coffee, Search, ShoppingBasket } from "lucide-react";
-import { navigation } from "../utils/dataNav";
+import { navigation } from "../../utils/dataNav";
 import Link from "next/link";
-import { useSearch } from "../context/SearchContext";
-import useAuth from "../hook/useAuth";
-import SignInLink from "../(form)/signIn/SignInLink";
-import UserInfo from "../(form)/signIn/UserInfo";
-import BasketDrawer from "./basket/BasketDrawer"; // Importez le composant BasketDrawer
-import { useBasket } from "../context/BasketContext";
+import { useSearch } from "../../context/SearchContext";
+import useAuth from "../../hook/useAuth";
+import SignInLink from "../../(form)/signIn/SignInLink";
+import UserInfo from "../../(form)/signIn/UserInfo";
+import BasketDrawer from "../basket/BasketDrawer"; // Importez le composant BasketDrawer
+import ShoppingBasketUser from "./ShoppingBasketUser";
 
 export default function Nav() {
   const { searchTerm, setSearchTerm } = useSearch();
   const { user, signOut } = useAuth();
   const [isBasketOpen, setIsBasketOpen] = useState(false);
-  const { basket } = useBasket();
 
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
@@ -27,11 +26,13 @@ export default function Nav() {
   };
 
   return (
-    <div className="w-full py-4 px-10 flex items-center justify-between ">
+    <div className="w-full py-4  px-36 flex items-center justify-between ">
       {/* LOGO */}
-      <Link href="/" className="flex gap-2 items-center cursor-pointer">
+      <Link href="/" className="flex gap-2 pl-24 items-center cursor-pointer">
         <Coffee className="text-pink-700" />{" "}
-        <span className="text-2xl font-bold uppercase">Fake Coffee </span>
+        <span className="text-2xl font-semibold tracking-tight text-pretty text-gray-900  uppercase">
+          Fake Coffee{" "}
+        </span>
       </Link>
 
       {/* INPUT */}
@@ -55,14 +56,10 @@ export default function Nav() {
 
           <button onClick={handleBasketOpen} className="flex     gap-2">
             <div className="relative">
-              {" "}
-              <ShoppingBasket className="text-pink-700     flex gap-2" />
-              <div className="absolute -top-2 -right-2 bg-pink-700 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
-                {basket.length}
-              </div>
+              <ShoppingBasketUser />
             </div>
 
-            <span className="uppercase ml-2 hover:text-pink-700 cursor-pointer">
+            <span className="  tracking-tight text-pretty text-gray-900  ml-2 hover:text-pink-700 cursor-pointer">
               Panier
             </span>
           </button>
