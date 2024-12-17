@@ -47,7 +47,6 @@ export default function RightContact() {
             error={errors.email}
             type="email"
             autoComplete="email"
-            className="sm:col-span-2" // Utilisez la classe col-span-2 ici
           />
           <ContactFormField
             label="Phone number"
@@ -56,7 +55,6 @@ export default function RightContact() {
             error={errors.phoneNumber}
             type="tel"
             autoComplete="tel"
-            className="sm:col-span-2" // Utilisez la classe col-span-2 ici
           />
           <ContactFormField
             label="Message"
@@ -65,7 +63,6 @@ export default function RightContact() {
             error={errors.message}
             type="textarea"
             rows={4}
-            className="sm:col-span-2" // Utilisez la classe col-span-2 ici
           />
         </div>
         <div className="mt-8 flex justify-end">

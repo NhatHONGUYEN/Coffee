@@ -34,8 +34,8 @@ export default function SignUpForm() {
         </h2>
       </div>
 
-      <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-[480px]">
-        <div className="bg-white px-6 py-12 shadow sm:rounded-lg sm:px-12">
+      <div className="mt-10 border rounded-md sm:mx-auto sm:w-full sm:max-w-[480px]">
+        <div className="bg-white px-6 py-12 shadow-md sm:rounded-lg sm:px-12">
           <form
             onSubmit={handleSubmit(onSubmit)}
             method="POST"

@@ -34,8 +34,8 @@ export default function SignInForm() {
         </h2>
       </div>
 
-      <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-[480px]">
-        <div className="bg-white px-6 py-12 shadow sm:rounded-lg sm:px-12">
+      <div className="mt-10 border rounded-md sm:mx-auto sm:w-full sm:max-w-[480px]">
+        <div className=" px-6 py-12 shadow-md sm:rounded-lg sm:px-12">
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
             <div>
               <label
@@ -66,7 +66,7 @@ export default function SignInForm() {
             <div className="flex items-center justify-between"></div>
 
             <div>
-              <Button className="w-full hover:bg-pink-700 " type="submit">
+              <Button className="w-full " type="submit">
                 Sign in
               </Button>
             </div>

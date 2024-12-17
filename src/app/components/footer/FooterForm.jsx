@@ -7,12 +7,12 @@ const FooterForm = () => (
     <h3 className="text-sm font-semibold text-gray-900">
       Abonnez-vous à notre newsletter
     </h3>
-    <p className="mt-2 text-sm text-gray-600">
+    <p className="mt-2 text-sm text-gray-600 ">
       Les dernières nouvelles, articles et ressources, envoyés dans votre boîte
       de réception chaque semaine.
     </p>
     <form className="mt-6 sm:flex sm:max-w-md">
-      <label htmlFor="email-address" className="sr-only">
+      <label htmlFor="email-address" className="sr-only bg-white">
         Adresse e-mail
       </label>
       <Input

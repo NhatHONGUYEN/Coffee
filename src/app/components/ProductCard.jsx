@@ -47,7 +47,7 @@ export default function ProductCard({ product }) {
 
   return (
     <Link href={`/product/${product.id}`}>
-      <Card className="relative">
+      <Card className="relative shadow-md hover:shadow-lg transition-shadow cursor-pointer">
         {user && (
           <div className="absolute top-2 right-2">
             <Button
