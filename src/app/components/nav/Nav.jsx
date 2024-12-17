@@ -26,64 +26,67 @@ export default function Nav() {
   };
 
   return (
-    <div className="w-full py-4  px-36 flex items-center justify-between ">
-      {/* LOGO */}
-      <Link href="/" className="flex gap-2 pl-24 items-center cursor-pointer">
-        <Coffee className="text-pink-700" />{" "}
-        <span className="text-2xl font-semibold tracking-tight text-pretty text-gray-900  uppercase">
-          Fake Coffee{" "}
-        </span>
-      </Link>
+    <div>
+      <div className="w-full py-4 fixed bg-zinc-50 z-20 px-36 flex items-center justify-between ">
+        {/* LOGO */}
+        <Link href="/" className="flex gap-2 pl-24 items-center cursor-pointer">
+          <Coffee className="text-pink-700" />{" "}
+          <span className="text-2xl font-semibold tracking-tight text-pretty text-gray-900  uppercase">
+            Fake Coffee{" "}
+          </span>
+        </Link>
 
-      {/* INPUT */}
-      <div className="flex flex-col ">
-        <div className="flex gap-5 items-center">
-          <div className="relative">
-            <Input
-              className="pl-9"
-              placeholder="Rechercher des produits"
-              value={searchTerm}
-              onChange={handleSearchChange}
-            />
-            <div className="absolute inset-y-0 left-0 pl-2 flex items-center pointer-events-none">
-              <Search className="h-4" />
+        {/* INPUT */}
+        <div className="flex flex-col ">
+          <div className="flex gap-5 items-center">
+            <div className="relative">
+              <Input
+                className="pl-9 bg-white"
+                placeholder="Rechercher des produits"
+                value={searchTerm}
+                onChange={handleSearchChange}
+              />
+              <div className="absolute inset-y-0 left-0 pl-2 flex items-center pointer-events-none">
+                <Search className="h-4" />
+              </div>
             </div>
+
+            {/* USER & PANIER */}
+
+            {user ? <UserInfo user={user} signOut={signOut} /> : <SignInLink />}
+
+            <button onClick={handleBasketOpen} className="flex     gap-2">
+              <div className="relative">
+                <ShoppingBasketUser />
+              </div>
+
+              <span className="  tracking-tight text-pretty text-gray-900  ml-2 hover:text-pink-700 cursor-pointer">
+                Panier
+              </span>
+            </button>
           </div>
 
-          {/* USER & PANIER */}
-
-          {user ? <UserInfo user={user} signOut={signOut} /> : <SignInLink />}
-
-          <button onClick={handleBasketOpen} className="flex     gap-2">
-            <div className="relative">
-              <ShoppingBasketUser />
-            </div>
-
-            <span className="  tracking-tight text-pretty text-gray-900  ml-2 hover:text-pink-700 cursor-pointer">
-              Panier
-            </span>
-          </button>
+          {/* NAVIGATION */}
+          <div className="flex mx-auto gap-6 pt-4 text-md italic text-gray-600 ">
+            {navigation.map((nav, index) => (
+              <Link
+                key={index}
+                href={nav.href}
+                className=" hover:text-pink-700 cursor-pointer"
+              >
+                {nav.name}
+              </Link>
+            ))}
+          </div>
         </div>
 
-        {/* NAVIGATION */}
-        <div className="flex mx-auto gap-6 pt-4 text-md italic text-gray-600 ">
-          {navigation.map((nav, index) => (
-            <Link
-              key={index}
-              href={nav.href}
-              className=" hover:text-pink-700 cursor-pointer"
-            >
-              {nav.name}
-            </Link>
-          ))}
-        </div>
+        {/* BASKET DRAWER */}
+        <BasketDrawer
+          isOpen={isBasketOpen}
+          onClose={() => setIsBasketOpen(false)}
+        />
       </div>
-
-      {/* BASKET DRAWER */}
-      <BasketDrawer
-        isOpen={isBasketOpen}
-        onClose={() => setIsBasketOpen(false)}
-      />
+      <div className="h-20 w-full bg-white"></div>
     </div>
   );
 }

@@ -19,13 +19,13 @@ export default function BasketDrawer({ isOpen, onClose }) {
   };
 
   return (
-    <Dialog open={isOpen} onClose={onClose} className="relative z-10">
+    <Dialog open={isOpen} onClose={onClose} className="relative ">
       <DialogBackdrop
         transition
-        className="fixed inset-0 bg-gray-500/75 transition-opacity duration-500 ease-in-out data-[closed]:opacity-0"
+        className="fixed inset-0 bg-gray-500/75 z-50  transition-opacity duration-500 ease-in-out data-[closed]:opacity-0"
       />
 
-      <div className="fixed inset-0 overflow-hidden">
+      <div className="fixed inset-0 overflow-hidden z-50">
         <div className="absolute inset-0 overflow-hidden">
           <div className="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10">
             <DialogPanel
