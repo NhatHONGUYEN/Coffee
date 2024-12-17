@@ -9,7 +9,7 @@ import { useFetchProducts } from "../hook/useFetchProducts";
 export default function Products() {
   const { searchTerm } = useSearch();
   const { products, error, loading } = useFetchProducts();
-  const itemsPerPage = 8;
+  const itemsPerPage = 4;
   const { displayedProducts, currentIndex, loadMore } = useDisplayedProducts(
     products,
     searchTerm,

@@ -20,9 +20,9 @@ export default function Suggestions() {
     .map((product) => <ProductCard product={product} key={product.id} />);
 
   return (
-    <div className="max-w-7xl mx-auto  ">
+    <div className="max-w-7xl mx-auto   ">
       <h1 className="text-xl font-bold pt-5  pb-10  ">Suggestions</h1>
-      <div className="flex gap-10">{randomProducts}</div>;
+      <div className="flex gap-10 ">{randomProducts}</div>;
     </div>
   );
 }

@@ -12,6 +12,7 @@ import { useBasket } from "../context/BasketContext";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { useLikes } from "../context/LikesContext";
 import useAuth from "../hook/useAuth";
+import Image from "next/image";
 
 const truncateText = (text, maxLength) => {
   if (text.length <= maxLength) {
@@ -59,10 +60,13 @@ export default function ProductCard({ product }) {
           </div>
         )}
         <CardHeader>
-          <img
-            className="object-cover  w-full h-48"
+          <Image
             src={product.image_url}
             alt={product.name}
+            objectFit="cover"
+            width={300}
+            height={100}
+            className="object-cover "
           />
         </CardHeader>
         <CardContent>
