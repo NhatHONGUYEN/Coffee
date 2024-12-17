@@ -67,7 +67,7 @@ export default function ProductCard({ product }) {
         </CardHeader>
         <CardContent>
           <CardTitle>{product.name}</CardTitle>
-          <CardDescription className="pt-2">
+          <CardDescription className="pt-2 text-gray-600 italic">
             {truncateText(product.description, 30)}
           </CardDescription>
         </CardContent>

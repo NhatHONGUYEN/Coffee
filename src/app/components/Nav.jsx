@@ -69,7 +69,7 @@ export default function Nav() {
         </div>
 
         {/* NAVIGATION */}
-        <div className="flex gap-4 justify-evenly pt-4 text-md ">
+        <div className="flex mx-auto gap-6 pt-4 text-md italic text-gray-600 ">
           {navigation.map((nav, index) => (
             <Link
               key={index}
