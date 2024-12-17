@@ -3,10 +3,10 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import {
   doc,
-  getDoc,
+  onSnapshot,
   updateDoc,
   arrayUnion,
-  arrayRemove,
+  getDoc,
 } from "firebase/firestore";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth, db } from "../api/firebaseConfig";
@@ -18,27 +18,25 @@ export const LikesProvider = ({ children }) => {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
+    const unsubscribeAuth = onAuthStateChanged(auth, (user) => {
       if (user) {
         setUser(user);
-        fetchLikes(user.uid);
+        const userDocRef = doc(db, "users", user.uid);
+        const unsubscribeLikes = onSnapshot(userDocRef, (docSnap) => {
+          if (docSnap.exists()) {
+            setLikes(docSnap.data().likes || []);
+            console.log("Likes fetched from Firestore:", docSnap.data().likes);
+          }
+        });
+        return () => unsubscribeLikes();
       } else {
         setUser(null);
         setLikes([]);
       }
     });
 
-    return () => unsubscribe();
+    return () => unsubscribeAuth();
   }, []);
-
-  const fetchLikes = async (userId) => {
-    const userDocRef = doc(db, "users", userId);
-    const userDocSnap = await getDoc(userDocRef);
-    if (userDocSnap.exists()) {
-      setLikes(userDocSnap.data().likes || []);
-      console.log("Likes fetched from Firestore:", userDocSnap.data().likes);
-    }
-  };
 
   const addLike = async (product) => {
     if (user) {
@@ -47,25 +45,40 @@ export const LikesProvider = ({ children }) => {
         return;
       }
 
-      const userDocRef = doc(db, "users", user.uid);
-      await updateDoc(userDocRef, {
-        likes: arrayUnion(product),
-      });
-      setLikes((prevLikes) => [...prevLikes, product]);
-      console.log("Like added:", product);
+      try {
+        const userDocRef = doc(db, "users", user.uid);
+        await updateDoc(userDocRef, {
+          likes: arrayUnion(product),
+        });
+        console.log("Like added to Firestore:", product);
+      } catch (error) {
+        console.error("Error adding like to Firestore:", error);
+      }
     }
   };
 
   const removeLike = async (productId) => {
     if (user) {
-      const userDocRef = doc(db, "users", user.uid);
-      await updateDoc(userDocRef, {
-        likes: arrayRemove({ id: productId }),
-      });
-      setLikes((prevLikes) =>
-        prevLikes.filter((product) => product.id !== productId)
-      );
-      console.log("Like removed:", productId);
+      try {
+        const userDocRef = doc(db, "users", user.uid);
+        const userDocSnap = await getDoc(userDocRef);
+
+        if (userDocSnap.exists()) {
+          const currentLikes = userDocSnap.data().likes || [];
+          const updatedLikes = currentLikes.filter(
+            (product) => product.id !== productId
+          );
+
+          await updateDoc(userDocRef, {
+            likes: updatedLikes,
+          });
+
+          setLikes(updatedLikes);
+          console.log("Like removed from Firestore:", productId);
+        }
+      } catch (error) {
+        console.error("Error removing like from Firestore:", error);
+      }
     }
   };
 
