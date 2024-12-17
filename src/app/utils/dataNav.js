@@ -1,9 +1,8 @@
 export const navigation = [
-  { name: "Offres", href: "/offer" },
-  { name: "Cafés", href: "/coffee" },
+  { name: "Cafés", href: "/" },
   { name: "Thés", href: "/thea" },
   { neme: "Gourmandises", href: "/gourmandises" },
-  { name: "Accessoires", href: "/accessoires" },
+  { name: "Testimonials", href: "/testimonials" },
   { name: "Blog", href: "/blog" },
   { name: "Contact", href: "/contact" },
 ];
