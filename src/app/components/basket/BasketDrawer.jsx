@@ -69,7 +69,7 @@ export default function BasketDrawer({ isOpen, onClose }) {
                   </Button>
                   {basket.length > 0 && (
                     <Button
-                      className="mt-2 w-full bg-pink-700"
+                      className="mt-2 w-full bg-pink-700 hover:bg-pink-600"
                       onClick={handleCheckout}
                     >
                       Payer avec Stripe

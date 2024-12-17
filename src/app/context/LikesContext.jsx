@@ -36,12 +36,12 @@ export const LikesProvider = ({ children }) => {
     const userDocSnap = await getDoc(userDocRef);
     if (userDocSnap.exists()) {
       setLikes(userDocSnap.data().likes || []);
+      console.log("Likes fetched from Firestore:", userDocSnap.data().likes);
     }
   };
 
   const addLike = async (product) => {
     if (user) {
-      // Vérifie si le produit est déjà liké
       if (likes.some((likedProduct) => likedProduct.id === product.id)) {
         console.log("Ce produit est déjà liké.");
         return;
@@ -52,6 +52,7 @@ export const LikesProvider = ({ children }) => {
         likes: arrayUnion(product),
       });
       setLikes((prevLikes) => [...prevLikes, product]);
+      console.log("Like added:", product);
     }
   };
 
@@ -64,6 +65,7 @@ export const LikesProvider = ({ children }) => {
       setLikes((prevLikes) =>
         prevLikes.filter((product) => product.id !== productId)
       );
+      console.log("Like removed:", productId);
     }
   };
 

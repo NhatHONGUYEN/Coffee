@@ -1,7 +1,7 @@
 export default function Hero() {
   return (
-    <div className="mx-auto max-w-7xl  ">
-      <h1 className="text-4xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-5xl py-10 ">
+    <div className="mx-auto max-w-7xl pt-10 flex flex-col  justify-center items-center text-center">
+      <h1 className="text-4xl font-semibold tracking-tight  text-pretty text-gray-900 sm:text-5xl py-10 ">
         Coffret de café de spécialité
       </h1>
       <p className=" max-w-5xl">
