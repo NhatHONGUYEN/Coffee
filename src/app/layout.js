@@ -1,10 +1,11 @@
 import localFont from "next/font/local";
 import "./globals.css";
 import Nav from "./components/nav/Nav";
-import { SearchProvider } from "./context/SearchContext";
 import { BasketProvider } from "./context/BasketContext";
 import { LikesProvider } from "./context/LikesContext";
+import { SearchProvider } from "./context/SearchContext";
 import Footer from "./components/footer/Footer";
+import { Toaster } from "@/components/ui/sonner";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -33,6 +34,7 @@ export default function RootLayout({ children }) {
             >
               <Nav />
               {children}
+              <Toaster />
               <Footer />
             </body>
           </SearchProvider>

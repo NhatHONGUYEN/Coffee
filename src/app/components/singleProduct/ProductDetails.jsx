@@ -8,12 +8,14 @@ import ProductAccordion from "./ProductAccordion";
 import ProductInfo from "./ProductInfo";
 import Reviews from "../review/Reviews";
 import Image from "next/image";
+import { showSuccessToast } from "@/app/utils/Toast";
 
 export default function ProductDetails({ product }) {
   const { addItem } = useBasket();
 
   const handleAddItem = () => {
     addItem(product);
+    showSuccessToast("Added to cart");
   };
 
   return (

@@ -13,6 +13,7 @@ import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { useLikes } from "../context/LikesContext";
 import useAuth from "../hook/useAuth";
 import Image from "next/image";
+import { showSuccessToast } from "../utils/Toast";
 
 const truncateText = (text, maxLength) => {
   if (text.length <= maxLength) {
@@ -29,6 +30,7 @@ export default function ProductCard({ product }) {
   const handleAddItem = (event) => {
     event.preventDefault(); // Empêche la propagation de l'événement de clic
     addItem(product);
+    showSuccessToast("Added to cart");
   };
 
   const handleLike = (event) => {
@@ -36,12 +38,11 @@ export default function ProductCard({ product }) {
     if (user) {
       if (isLiked(product.id)) {
         removeLike(product.id);
+        showSuccessToast("Removed from favorites");
       } else {
         addLike(product);
+        showSuccessToast("Added to favorites");
       }
-    } else {
-      // Rediriger l'utilisateur vers la page de connexion ou afficher un message
-      console.log("Veuillez vous connecter pour ajouter des likes.");
     }
   };
 

@@ -1,6 +1,7 @@
 "use client";
 
 import ProductDetails from "@/app/components/singleProduct/ProductDetails";
+import { useBasket } from "@/app/context/BasketContext";
 import { useFetchProducts } from "@/app/hook/useFetchProducts";
 import axios from "axios";
 import { useParams } from "next/navigation";
@@ -10,6 +11,7 @@ export default function page() {
   const { id } = useParams();
   const [products, setProducts] = useState([]);
   const { loading, error } = useFetchProducts();
+  const { basket } = useBasket();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -25,7 +27,7 @@ export default function page() {
     };
 
     fetchData();
-  }, []);
+  }, [basket]);
 
   if (loading) {
     return (

@@ -15,7 +15,7 @@ export default function Suggestions() {
   }
 
   const randomProducts = products
-    .sort(() => Math.random() - 0.5)
+
     .slice(0, 4)
     .map((product) => <ProductCard product={product} key={product.id} />);
 
