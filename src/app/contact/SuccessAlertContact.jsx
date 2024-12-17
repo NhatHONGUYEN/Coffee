@@ -2,17 +2,13 @@ import {
   AlertDialog,
   AlertDialogContent,
   AlertDialogDescription,
-  AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-  AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { Button } from "@/components/ui/button";
 
-export default function SuccessAlertContact({ trigger, onClose }) {
+export default function SuccessAlertContact({ isOpen, onOpenChange }) {
   return (
-    <AlertDialog>
-      <AlertDialogTrigger asChild>{trigger}</AlertDialogTrigger>
+    <AlertDialog open={isOpen} onOpenChange={onOpenChange}>
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>Merci pour votre message !</AlertDialogTitle>
@@ -21,9 +17,6 @@ export default function SuccessAlertContact({ trigger, onClose }) {
             la page d'accueil.
           </AlertDialogDescription>
         </AlertDialogHeader>
-        <AlertDialogFooter>
-          <Button onClick={onClose}>Continuer</Button>
-        </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
   );

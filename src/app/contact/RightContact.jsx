@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import ContactForm from "./ContactForm";
+import SuccessAlertContact from "./SuccessAlertContact";
 
 export default function RightContact() {
   const {
@@ -17,11 +18,11 @@ export default function RightContact() {
   });
 
   const router = useRouter();
-  const [showAlert, setShowAlert] = useState(false);
+  const [isOpen, setisOpen] = useState(false);
 
   const onSubmit = (data) => {
     console.log("data", data);
-    setShowAlert(true);
+    setisOpen(true);
 
     const redirectTimeout = setTimeout(() => {
       router.push("/");
@@ -30,11 +31,6 @@ export default function RightContact() {
     return () => {
       clearTimeout(redirectTimeout);
     };
-  };
-
-  const handleCloseAlert = () => {
-    setShowAlert(false);
-    router.push("/");
   };
 
   return (
@@ -47,12 +43,7 @@ export default function RightContact() {
         <div className="mt-8 flex justify-end">
           <Button type="submit">Send message</Button>
         </div>
-        {showAlert && (
-          <SuccessAlert
-            trigger={<Button>Send message</Button>}
-            onClose={handleCloseAlert}
-          />
-        )}
+        <SuccessAlertContact isOpen={isOpen} onOpenChange={setisOpen} />
       </div>
     </form>
   );
