@@ -1,6 +1,7 @@
 "use client";
 
 import ProductDetails from "@/app/components/singleProduct/ProductDetails";
+import { useFetchProducts } from "@/app/hook/useFetchProducts";
 import axios from "axios";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -8,7 +9,7 @@ import { useEffect, useState } from "react";
 export default function page() {
   const { id } = useParams();
   const [products, setProducts] = useState([]);
-  const [error, setError] = useState(null);
+  const { loading, error } = useFetchProducts();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -25,6 +26,14 @@ export default function page() {
 
     fetchData();
   }, []);
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center w-full h-screen">
+        Chargement...
+      </div>
+    );
+  }
 
   if (error) {
     return <div>Erreur : {error}</div>;

@@ -29,7 +29,7 @@ export default function RootLayout({ children }) {
         <LikesProvider>
           <SearchProvider>
             <body
-              className={`${geistSans.variable} ${geistMono.variable} antialiased  `}
+              className={`${geistSans.variable} ${geistMono.variable} antialiased   `}
             >
               <Nav />
               {children}
