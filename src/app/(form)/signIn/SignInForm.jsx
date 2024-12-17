@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Coffee } from "lucide-react";
 import { useForm } from "react-hook-form";
-import loginSchema from "../schemas/loginSchema"; // Utilisez le schéma de connexion
+import loginSchema from "../../schemas/loginSchema"; // Utilisez le schéma de connexion
 import useAuth from "@/app/hook/useAuth";
 
 export default function SignInForm() {
