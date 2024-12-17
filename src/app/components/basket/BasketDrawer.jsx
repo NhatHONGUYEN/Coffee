@@ -32,11 +32,11 @@ export default function BasketDrawer({ isOpen, onClose }) {
               transition
               className="pointer-events-auto w-screen max-w-md transform transition duration-500 ease-in-out data-[closed]:translate-x-full sm:duration-700"
             >
-              <div className="flex h-full justify-between flex-col overflow-y-scroll bg-white py-6 shadow-xl">
-                <div className="px-4 sm:px-6">
-                  <div className="flex items-start justify-between">
-                    <DialogTitle className="text-base font-semibold py-10 text-gray-900">
-                      Votre Panier
+              <div className="flex  h-full justify-between flex-col overflow-y-scroll bg-white py-6 shadow-xl">
+                <div className="mx-auto">
+                  <div className="px-4 sm:px-6">
+                    <DialogTitle className="text-lg text-center font-semibold   pt-12  text-gray-900">
+                      Your cart
                     </DialogTitle>
                   </div>
                   <div className="mt-2 ">
@@ -51,12 +51,13 @@ export default function BasketDrawer({ isOpen, onClose }) {
                             />
                           ))}
                         </ul>
-                        <div className="font-bold flex justify-between mx-auto w-80 border-t-2 border-gray-300 pt-10">
-                          Total: <div>{totalPrice} €</div>
+                        <div className="flex justify-between mx-auto w-80 pt-10">
+                          <span className="italic">Total:</span>{" "}
+                          <div>{totalPrice} €</div>
                         </div>
                       </div>
                     ) : (
-                      <p className="text-sm   text-gray-500">
+                      <p className="text-sm pt-10   text-gray-500">
                         Votre panier est vide.
                       </p>
                     )}

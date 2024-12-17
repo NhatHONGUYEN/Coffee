@@ -19,7 +19,7 @@ const BasketDrawerArticles = ({ item }) => {
 
   return (
     <>
-      <li className="flex border-t-2 border-gray-300  mx-6 h-40 justify-center items-center   pr-8  mb-2">
+      <li className="flex   mx-6 h-40 justify-center items-center   pr-8  mb-2">
         <div className="flex justify-center items-center h-full ">
           <img
             src={item.image_url}
