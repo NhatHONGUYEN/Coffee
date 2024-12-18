@@ -10,16 +10,13 @@ import {
 import { useBasket } from "../../context/BasketContext";
 import { Button } from "@/components/ui/button";
 import BasketDrawerArticles from "./BasketDrawerArticles";
-
 import { useEffect, useState } from "react";
 import convertToSubcurrency from "@/app/utils/convertToSubcurrency";
-import { useRouter } from "next/navigation";
 import CheckoutButton from "@/app/checkout/CheckoutButton";
 
 export default function BasketDrawer({ isOpen, onClose }) {
   const { basket, removeItem, totalPrice } = useBasket();
-  const [clientSecret, setClientSecret] = useState(null);
-  const router = useRouter();
+  const [clientSecret, setClientSecret] = useState(null); // Correction ici
 
   useEffect(() => {
     if (totalPrice) {
@@ -41,7 +38,7 @@ export default function BasketDrawer({ isOpen, onClose }) {
           .then((data) => {
             console.log("API Response:", data);
             if (data.clientSecret) {
-              setClientSecret(data.clientSecret);
+              setClientSecret(data.clientSecret); // Correction ici
             } else {
               console.error(
                 "Erreur lors de la création du PaymentIntent:",
@@ -52,10 +49,6 @@ export default function BasketDrawer({ isOpen, onClose }) {
           .catch((error) => {
             console.error("Erreur réseau:", error);
           });
-      } else {
-        console.error(
-          "Le montant est inférieur au montant minimum autorisé par Stripe."
-        );
       }
     }
   }, [totalPrice]);
@@ -113,7 +106,11 @@ export default function BasketDrawer({ isOpen, onClose }) {
                     Continue to shopping
                   </Button>
                   {basket.length > 0 && (
-                    <CheckoutButton amount={totalPrice} onClose={onClose} />
+                    <CheckoutButton
+                      clientSecret={clientSecret}
+                      amount={totalPrice}
+                      onClose={onClose}
+                    /> // Correction ici
                   )}
                 </div>
               </div>
