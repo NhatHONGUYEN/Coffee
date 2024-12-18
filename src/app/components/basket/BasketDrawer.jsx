@@ -10,50 +10,10 @@ import {
 import { useBasket } from "../../context/BasketContext";
 import { Button } from "@/components/ui/button";
 import BasketDrawerArticles from "./BasketDrawerArticles";
-import { useEffect, useState } from "react";
-import convertToSubcurrency from "@/app/utils/convertToSubcurrency";
 import CheckoutButton from "@/app/checkout/CheckoutButton";
 
 export default function BasketDrawer({ isOpen, onClose }) {
   const { basket, removeItem, totalPrice } = useBasket();
-  const [clientSecret, setClientSecret] = useState(null); // Correction ici
-
-  useEffect(() => {
-    if (totalPrice) {
-      const amountInCents = convertToSubcurrency(totalPrice);
-      if (amountInCents >= 50) {
-        fetch("/api/create-payment-intent", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ amount: amountInCents }),
-        })
-          .then((res) => {
-            if (!res.ok) {
-              throw new Error("Network response was not ok");
-            }
-            return res.json();
-          })
-          .then((data) => {
-            console.log("API Response:", data);
-            if (data.clientSecret) {
-              setClientSecret(data.clientSecret); // Correction ici
-            } else {
-              console.error(
-                "Erreur lors de la création du PaymentIntent:",
-                data.error
-              );
-            }
-          })
-          .catch((error) => {
-            console.error("Erreur réseau:", error);
-          });
-      }
-    }
-  }, [totalPrice]);
-
-  console.log("totalPrice", totalPrice);
 
   return (
     <Dialog open={isOpen} onClose={onClose} className="relative ">
@@ -106,11 +66,7 @@ export default function BasketDrawer({ isOpen, onClose }) {
                     Continue to shopping
                   </Button>
                   {basket.length > 0 && (
-                    <CheckoutButton
-                      clientSecret={clientSecret}
-                      amount={totalPrice}
-                      onClose={onClose}
-                    /> // Correction ici
+                    <CheckoutButton amount={totalPrice} onClose={onClose} />
                   )}
                 </div>
               </div>

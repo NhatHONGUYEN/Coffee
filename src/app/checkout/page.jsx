@@ -19,7 +19,6 @@ const Checkout = () => {
   const [clientSecret, setClientSecret] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const router = useRouter();
   const searchParams = useSearchParams();
   const amount = searchParams.get("amount");
 

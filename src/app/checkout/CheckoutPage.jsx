@@ -1,19 +1,56 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   PaymentElement,
   useStripe,
   useElements,
 } from "@stripe/react-stripe-js";
 import { useRouter } from "next/navigation";
+import convertToSubcurrency from "@/app/utils/convertToSubcurrency";
 
-const CheckoutPage = ({ amount, clientSecret }) => {
+const CheckoutPage = ({ amount }) => {
   const stripe = useStripe();
   const elements = useElements();
+  const [clientSecret, setClientSecret] = useState(null);
   const [errorMessage, setErrorMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const router = useRouter();
+
+  useEffect(() => {
+    if (amount) {
+      const amountInCents = convertToSubcurrency(amount);
+      if (amountInCents >= 50) {
+        fetch("/api/create-payment-intent", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ amount: amountInCents }),
+        })
+          .then((res) => {
+            if (!res.ok) {
+              throw new Error("Network response was not ok");
+            }
+            return res.json();
+          })
+          .then((data) => {
+            console.log("API Response:", data);
+            if (data.clientSecret) {
+              setClientSecret(data.clientSecret);
+            } else {
+              console.error(
+                "Erreur lors de la création du PaymentIntent:",
+                data.error
+              );
+            }
+          })
+          .catch((error) => {
+            console.error("Erreur réseau:", error);
+          });
+      }
+    }
+  }, [amount]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
