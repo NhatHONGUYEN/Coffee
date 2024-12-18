@@ -1,15 +1,7 @@
 "use client";
 
 import { createContext, useContext, useState, useEffect } from "react";
-import {
-  doc,
-  getDoc,
-  setDoc,
-  updateDoc,
-  arrayUnion,
-  arrayRemove,
-  runTransaction,
-} from "firebase/firestore";
+import { doc, getDoc, setDoc, runTransaction } from "firebase/firestore";
 import { auth, db } from "../api/firebaseConfig";
 
 // Create context

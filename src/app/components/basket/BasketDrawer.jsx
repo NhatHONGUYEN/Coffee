@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Dialog,
   DialogBackdrop,
@@ -6,17 +8,59 @@ import {
 } from "@headlessui/react";
 
 import { useBasket } from "../../context/BasketContext";
-
 import { Button } from "@/components/ui/button";
 import BasketDrawerArticles from "./BasketDrawerArticles";
 
+import { useEffect, useState } from "react";
+import convertToSubcurrency from "@/app/utils/convertToSubcurrency";
+import { useRouter } from "next/navigation";
+import CheckoutButton from "@/app/checkout/CheckoutButton";
+
 export default function BasketDrawer({ isOpen, onClose }) {
   const { basket, removeItem, totalPrice } = useBasket();
+  const [clientSecret, setClientSecret] = useState(null);
+  const router = useRouter();
 
-  const handleCheckout = () => {
-    // Rediriger vers le lien de test Stripe
-    window.location.href = "https://buy.stripe.com/test_fZe5nwb7ZdLG1TG28a";
-  };
+  useEffect(() => {
+    if (totalPrice) {
+      const amountInCents = convertToSubcurrency(totalPrice);
+      if (amountInCents >= 50) {
+        fetch("/api/create-payment-intent", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ amount: amountInCents }),
+        })
+          .then((res) => {
+            if (!res.ok) {
+              throw new Error("Network response was not ok");
+            }
+            return res.json();
+          })
+          .then((data) => {
+            console.log("API Response:", data);
+            if (data.clientSecret) {
+              setClientSecret(data.clientSecret);
+            } else {
+              console.error(
+                "Erreur lors de la création du PaymentIntent:",
+                data.error
+              );
+            }
+          })
+          .catch((error) => {
+            console.error("Erreur réseau:", error);
+          });
+      } else {
+        console.error(
+          "Le montant est inférieur au montant minimum autorisé par Stripe."
+        );
+      }
+    }
+  }, [totalPrice]);
+
+  console.log("totalPrice", totalPrice);
 
   return (
     <Dialog open={isOpen} onClose={onClose} className="relative ">
@@ -32,14 +76,14 @@ export default function BasketDrawer({ isOpen, onClose }) {
               transition
               className="pointer-events-auto w-screen max-w-md transform transition duration-500 ease-in-out data-[closed]:translate-x-full sm:duration-700"
             >
-              <div className="flex  h-full justify-between flex-col overflow-y-scroll bg-white py-6 shadow-xl">
+              <div className="flex h-full justify-between flex-col overflow-y-scroll bg-white py-6 shadow-xl">
                 <div className="mx-auto">
                   <div className="px-4 sm:px-6">
-                    <DialogTitle className="text-lg text-center font-semibold   pt-12  text-gray-900">
+                    <DialogTitle className="text-lg text-center font-semibold pt-12 text-gray-900">
                       Your cart
                     </DialogTitle>
                   </div>
-                  <div className="mt-2 ">
+                  <div className="mt-2">
                     {basket.length > 0 ? (
                       <div>
                         <ul>
@@ -57,24 +101,19 @@ export default function BasketDrawer({ isOpen, onClose }) {
                         </div>
                       </div>
                     ) : (
-                      <p className="text-sm pt-10   text-gray-500">
+                      <p className="text-sm pt-10 text-gray-500">
                         Votre panier est vide.
                       </p>
                     )}
                   </div>
                 </div>
 
-                <div className="p-6 ">
+                <div className="p-6">
                   <Button className="w-full" onClick={onClose}>
                     Continue to shopping
                   </Button>
                   {basket.length > 0 && (
-                    <Button
-                      className="mt-2 w-full bg-pink-700 hover:bg-pink-600"
-                      onClick={handleCheckout}
-                    >
-                      Payer avec Stripe
-                    </Button>
+                    <CheckoutButton amount={totalPrice} onClose={onClose} />
                   )}
                 </div>
               </div>
