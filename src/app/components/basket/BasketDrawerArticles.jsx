@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 
 import React from "react";
 import { useBasket } from "../../context/BasketContext";
+import Image from "next/image";
 
 const BasketDrawerArticles = ({ item }) => {
   const { addItem, removeItem } = useBasket();
