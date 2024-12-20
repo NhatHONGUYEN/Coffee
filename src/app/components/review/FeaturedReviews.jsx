@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { StarRating } from "./StarRating";
 
 export const FeaturedReviews = ({ reviews }) => (
@@ -6,7 +7,9 @@ export const FeaturedReviews = ({ reviews }) => (
       {reviews.map((review) => (
         <div key={review.id} className="py-12">
           <div className="flex items-center">
-            <img
+            <Image
+            width={48}
+            height={48}
               alt={`${review.author}.`}
               src={review.avatarSrc}
               className="size-12 rounded-full"

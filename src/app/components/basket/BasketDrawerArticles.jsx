@@ -21,10 +21,12 @@ const BasketDrawerArticles = ({ item }) => {
     <>
       <li className="flex   mx-6 h-40 justify-center items-center   pr-8  mb-2">
         <div className="flex justify-center items-center h-full ">
-          <img
+          <Image
+          width={128}
+          height={128}
             src={item.image_url}
             alt={item.name}
-            className="w-32 h-32 object-cover"
+            className="object-cover"
           />
         </div>
         <div className="flex ">
