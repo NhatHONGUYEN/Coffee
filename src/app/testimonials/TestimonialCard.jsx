@@ -1,3 +1,6 @@
+import Image from "next/image";
+import { auth } from "../api/firebaseConfig";
+
 export default function TestimonialCard({ testimonial }) {
   return (
     <div className="pt-8 sm:inline-block sm:w-full sm:px-4">
@@ -6,8 +9,10 @@ export default function TestimonialCard({ testimonial }) {
           <p>{`“${testimonial.body}”`}</p>
         </blockquote>
         <figcaption className="mt-6 flex items-center gap-x-4">
-          <img
-            alt=""
+          <Image
+            alt={auth.name}
+            width={40}
+            height={40}
             src={testimonial.author.imageUrl}
             className="size-10 rounded-full bg-gray-50"
           />

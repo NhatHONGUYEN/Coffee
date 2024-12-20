@@ -64,7 +64,7 @@ export default function ProductCard({ product }) {
           <Image
             src={product.image_url}
             alt={product.name}
-            objectFit="cover"
+        
             width={300}
             height={100}
             className="object-cover "
