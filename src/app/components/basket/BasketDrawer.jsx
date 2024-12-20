@@ -10,10 +10,15 @@ import {
 import { useBasket } from "../../context/BasketContext";
 import { Button } from "@/components/ui/button";
 import BasketDrawerArticles from "./BasketDrawerArticles";
-import CheckoutButton from "@/app/checkout/CheckoutButton";
+
 
 export default function BasketDrawer({ isOpen, onClose }) {
   const { basket, removeItem, totalPrice } = useBasket();
+
+  const handleCheckout = () => {
+    // Rediriger vers le lien de test Stripe
+    window.location.href = "https://buy.stripe.com/test_fZe5nwb7ZdLG1TG28a";
+  };
 
   return (
     <Dialog open={isOpen} onClose={onClose} className="relative ">
@@ -61,12 +66,17 @@ export default function BasketDrawer({ isOpen, onClose }) {
                   </div>
                 </div>
 
-                <div className="p-6">
+                <div className="p-6 ">
                   <Button className="w-full" onClick={onClose}>
                     Continue to shopping
                   </Button>
                   {basket.length > 0 && (
-                    <CheckoutButton amount={totalPrice} onClose={onClose} />
+                    <Button
+                      className="mt-2 w-full bg-pink-700 hover:bg-pink-600"
+                      onClick={handleCheckout}
+                    >
+                      Payer avec Stripe
+                    </Button>
                   )}
                 </div>
               </div>
