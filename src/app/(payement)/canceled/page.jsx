@@ -17,5 +17,6 @@ export default function Success() {
     <div>
       <h1>Paiement réussi !</h1>
       <p>Vous serez redirigé vers la page d'accueil dans 3 secondes...</p>
-    </div> );
+    </div>
+  );
 }
