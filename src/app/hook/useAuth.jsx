@@ -15,14 +15,12 @@ export default function useAuth() {
   const [user, setUser] = useState(null);
   const [error, setError] = useState(null);
   const router = useRouter();
+  const [isOpenSignUp, setisOpenSignUp] = useState(false);
+  const [isOpenSignIn, setisOpenSignIn] = useState(false);
 
   const signUpWithEmailAndPassword = async (email, password, username) => {
     try {
-      const result = await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
+      const result = await createUserWithEmailAndPassword(auth, email, password);
       const user = result.user;
 
       await setDoc(doc(db, "users", user.uid), {
@@ -32,12 +30,19 @@ export default function useAuth() {
       });
       const userData = await getUserData(user.uid);
       setUser(userData);
-      router.push("/");
+
+      setisOpenSignUp(true);
+
+      const redirectTimeout = setTimeout(() => {
+        router.push("/");
+      }, 3000);
+
+      return () => {
+        clearTimeout(redirectTimeout);
+      };
     } catch (error) {
       console.error("Erreur lors de la création du compte:", error);
-      setError(
-        "Une erreur s'est produite lors de la création du compte. Veuillez réessayer."
-      );
+      setError("Une erreur s'est produite lors de la création du compte. Veuillez réessayer.");
     }
   };
 
@@ -46,12 +51,19 @@ export default function useAuth() {
       const result = await signInWithEmailAndPassword(auth, email, password);
       const userData = await getUserData(result.user.uid);
       setUser(userData);
-      router.push("/");
+
+      setisOpenSignIn(true);
+
+      const redirectTimeout = setTimeout(() => {
+        router.push("/");
+      }, 3000);
+
+      return () => {
+        clearTimeout(redirectTimeout);
+      };
     } catch (error) {
       console.error("Erreur lors de la connexion:", error);
-      setError(
-        "Une erreur s'est produite lors de la connexion. Veuillez réessayer."
-      );
+      setError("Une erreur s'est produite lors de la connexion. Veuillez réessayer.");
     }
   };
 
@@ -62,9 +74,7 @@ export default function useAuth() {
       router.push("/"); // Rediriger vers la page de connexion après la déconnexion
     } catch (error) {
       console.error("Erreur lors de la déconnexion:", error);
-      setError(
-        "Une erreur s'est produite lors de la déconnexion. Veuillez réessayer."
-      );
+      setError("Une erreur s'est produite lors de la déconnexion. Veuillez réessayer.");
     }
   };
 
@@ -102,7 +112,11 @@ export default function useAuth() {
     error,
     signUpWithEmailAndPassword,
     signInWithEmailAndPass,
-    signOut, // Ajouter la fonction de déconnexion
+    signOut,
     moveToHome,
+    isOpenSignUp,
+    setisOpenSignUp,
+    isOpenSignIn,
+    setisOpenSignIn,
   };
 }

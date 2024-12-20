@@ -7,6 +7,7 @@ import { Coffee } from "lucide-react";
 import { useForm } from "react-hook-form";
 import loginSchema from "../../schemas/loginSchema"; // Utilisez le schéma de connexion
 import useAuth from "@/app/hook/useAuth";
+import SuccessAlertSignIn from "./SuccessAlertSignIn";
 
 export default function SignInForm() {
   const {
@@ -17,7 +18,8 @@ export default function SignInForm() {
     resolver: zodResolver(loginSchema), // Utilisez le schéma de connexion
   });
 
-  const { signInWithEmailAndPass, error } = useAuth();
+  const { signInWithEmailAndPass, error ,     isOpenSignIn,
+    setisOpenSignIn, } = useAuth();
 
   const onSubmit = async (data) => {
     const { email, password } = data;
@@ -70,6 +72,7 @@ export default function SignInForm() {
                 Sign in
               </Button>
             </div>
+            <SuccessAlertSignIn isOpen={isOpenSignIn} onOpenChange={setisOpenSignIn} />
           </form>
 
           {error && <p className="text-red-500">{error}</p>}

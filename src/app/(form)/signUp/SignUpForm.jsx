@@ -8,6 +8,7 @@ import useAuth from "../../hook/useAuth";
 import userSchema from "../../schemas/userSchema";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import SuccessAlertSignUp from "./SuccesAlertSignUp";
 
 export default function SignUpForm() {
   const {
@@ -18,7 +19,8 @@ export default function SignUpForm() {
     resolver: zodResolver(userSchema),
   });
 
-  const { signUpWithEmailAndPassword } = useAuth();
+  const { signUpWithEmailAndPassword ,    isOpenSignUp,
+    setisOpenSignUp, } = useAuth();
 
   const onSubmit = async (data) => {
     const { username, email, password } = data;
@@ -87,6 +89,7 @@ export default function SignUpForm() {
                 Sign up
               </Button>
             </div>
+            <SuccessAlertSignUp isOpen={isOpenSignUp} onOpenChange={setisOpenSignUp} />
           </form>
         </div>
       </div>
