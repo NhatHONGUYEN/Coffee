@@ -8,7 +8,7 @@ import {
 import { User } from "lucide-react";
 import Link from "next/link";
 
-export default function UserInfo({ user, signOut }) {
+export default function UserInfo({ user, logOut }) {
   return (
     <Popover className="relative">
       <PopoverTrigger className="flex gap-2 items-center cursor-pointer">
@@ -31,7 +31,7 @@ export default function UserInfo({ user, signOut }) {
           >
             Your Favorites
           </Link>
-          <Button onClick={signOut} className="block px-4 py-2 text-sm  w-full">
+          <Button onClick={logOut} className="block px-4 py-2 text-sm  w-full">
             Déconnexion
           </Button>
         </div>

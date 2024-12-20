@@ -8,7 +8,7 @@ import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
   signInWithEmailAndPassword,
-  signOut as firebaseSignOut,
+  signOut 
 } from "firebase/auth";
 
 export default function useAuth() {
@@ -67,9 +67,9 @@ export default function useAuth() {
     }
   };
 
-  const signOut = async () => {
+  const logOut = async () => {
     try {
-      await firebaseSignOut(auth);
+      await signOut(auth);
       setUser(null);
       router.push("/"); // Rediriger vers la page de connexion après la déconnexion
     } catch (error) {
@@ -112,7 +112,7 @@ export default function useAuth() {
     error,
     signUpWithEmailAndPassword,
     signInWithEmailAndPass,
-    signOut,
+    logOut,
     moveToHome,
     isOpenSignUp,
     setisOpenSignUp,

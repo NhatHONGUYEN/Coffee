@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Input } from "@/components/ui/input";
-import { Coffee, Search, ShoppingBasket } from "lucide-react";
+import { Coffee, Search} from "lucide-react";
 import { navigation } from "../../utils/dataNav";
 import Link from "next/link";
 import { useSearch } from "../../context/SearchContext";
@@ -14,7 +14,7 @@ import ShoppingBasketUser from "./ShoppingBasketUser";
 
 export default function Nav() {
   const { searchTerm, setSearchTerm } = useSearch();
-  const { user, signOut } = useAuth();
+  const { user, logOut } = useAuth();
   const [isBasketOpen, setIsBasketOpen] = useState(false);
 
   const handleSearchChange = (event) => {
@@ -53,7 +53,7 @@ export default function Nav() {
 
             {/* USER & PANIER */}
 
-            {user ? <UserInfo user={user} signOut={signOut} /> : <SignInLink />}
+            {user ? <UserInfo user={user} logOut={logOut} /> : <SignInLink />}
 
             <button onClick={handleBasketOpen} className="flex     gap-2">
               <div className="relative">
