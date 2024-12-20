@@ -25,9 +25,9 @@ export default function Footer() {
             </div>
           </div>
           <div className="mt-10 xl:mt-0">
-            <h3 className="text-sm font-semibold text-gray-900">
+            <h1 className="text-sm font-semibold text-gray-900">
               Abonnez-vous à notre newsletter
-            </h3>
+            </h1>
             <p className="mt-2 text-sm text-gray-600">
               Les dernières nouvelles, articles et ressources, envoyés dans
               votre boîte de réception chaque semaine.
@@ -36,9 +36,9 @@ export default function Footer() {
           </div>
         </div>
         <FooterSocialLinks
-          socialLinks={navigationFooter.social}
-          copyrightText="&copy; 2024 Votre Entreprise, Inc. Tous droits réservés."
-        />
+  socialLinks={navigationFooter.social}
+  copyrightText="&copy; 2024 Fake Coffee, Inc. All rights reserved."
+/>
       </div>
     </footer>
   );

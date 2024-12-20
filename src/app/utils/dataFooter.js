@@ -1,32 +1,32 @@
 // dataFooter.js
 export const navigationFooter = {
   solutions: [
-    { name: "Nos Cafés", href: "#" },
-    { name: "Accessoires", href: "#" },
-    { name: "Abonnements", href: "#" },
-    { name: "Événements", href: "#" },
-    { name: "Recettes", href: "#" },
+    { name: "Our Coffees", href: "/product" },
+    { name: "Accessories", href: "/notFinish" },
+    { name: "Subscriptions", href: "/notFinish" },
+    { name: "Events", href: "/notFinish" },
+    { name: "Recipes", href: "/notFinish" },
   ],
   support: [
-    { name: "Contactez-nous", href: "#" },
-    { name: "FAQ", href: "#" },
-    { name: "Guides d'utilisation", href: "#" },
+    { name: "Contact Us", href: "/notFinish" },
+    { name: "FAQ", href: "/notFinish" },
+    { name: "User Guides", href: "/notFinish" },
   ],
   company: [
-    { name: "À propos", href: "#" },
-    { name: "Blog", href: "#" },
-    { name: "Carrières", href: "#" },
-    { name: "Presse", href: "#" },
+    { name: "About", href: "/notFinish" },
+    { name: "Blog", href: "/blog" },
+    { name: "Careers", href: "/notFinish" },
+    { name: "Press", href: "/notFinish" },
   ],
   legal: [
-    { name: "Conditions d'utilisation", href: "#" },
-    { name: "Politique de confidentialité", href: "#" },
-    { name: "Licence", href: "#" },
+    { name: "Terms of Use", href: "/notFinish" },
+    { name: "Privacy Policy", href: "/notFinish" },
+    { name: "License", href: "/notFinish" },
   ],
   social: [
     {
       name: "Facebook",
-      href: "#",
+      href: "https://www.instagram.com/nhatflux/",
       icon: (props) => (
         <svg fill="currentColor" viewBox="0 0 24 24" {...props}>
           <path
@@ -39,7 +39,7 @@ export const navigationFooter = {
     },
     {
       name: "Instagram",
-      href: "#",
+      href: "https://www.instagram.com/nhatflux/",
       icon: (props) => (
         <svg fill="currentColor" viewBox="0 0 24 24" {...props}>
           <path
@@ -52,7 +52,7 @@ export const navigationFooter = {
     },
     {
       name: "X",
-      href: "#",
+      href: "https://www.instagram.com/nhatflux/",
       icon: (props) => (
         <svg fill="currentColor" viewBox="0 0 24 24" {...props}>
           <path d="M13.6823 10.6218L20.2391 3H18.6854L12.9921 9.61788L8.44486 3H3.2002L10.0765 13.0074L3.2002 21H4.75404L10.7663 14.0113L15.5685 21H20.8131L13.6819 10.6218H13.6823ZM11.5541 13.0956L10.8574 12.0991L5.31391 4.16971H7.70053L12.1742 10.5689L12.8709 11.5655L18.6861 19.8835H16.2995L11.5541 13.096V13.0956Z" />
