@@ -10,6 +10,7 @@ import {
   signInWithEmailAndPassword,
   signOut 
 } from "firebase/auth";
+import { showSuccessToast } from "../utils/Toast";
 
 export default function useAuth() {
   const [user, setUser] = useState(null);
@@ -71,6 +72,8 @@ export default function useAuth() {
     try {
       await signOut(auth);
       setUser(null);
+      showSuccessToast("You have been successfully logged out.");
+
       router.push("/"); // Rediriger vers la page de connexion après la déconnexion
     } catch (error) {
       console.error("Erreur lors de la déconnexion:", error);
